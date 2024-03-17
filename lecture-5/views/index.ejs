@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <style>
+        .button {
+            margin-top: 10px;
+            padding: 5px;
+            width: 150px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            width: 30%;
+        }
+
+        ul li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .todo-info {
+            flex: 1;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+    </style>
+</head>
+<body>
+
+<h1><%= title %></h1>
+
+<ul>
+    <% for (const todo of todos) { %>
+        <li>
+            <div class="todo-info">
+                <span><a href="/todo/<%= todo.id %>"><%= todo.title %></a></span>
+            </div>
+            <div class="buttons">
+                <form method="get" action="/toggle-todo/<%= todo.id %>">
+                    <button class="button" type="submit"><%= todo.done ? 'hotovo' : 'nehotovo' %></button>
+                </form>
+                <form method="get" action="/remove-todo/<%= todo.id %>">
+                    <button class="button" type="submit">Odstranit todočko</button>
+                </form>
+            </div>
+        </li>
+    <% } %>
+</ul>
+
+<form method="post" action="/add-todo">
+    <label>
+        <input placeholder="Název todočka" name="title">
+    </label>
+    <button type="submit">Přidat</button>
+</form>
+
+</body>
+</html>
