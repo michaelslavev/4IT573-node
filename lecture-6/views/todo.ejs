@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TODO - <%= todo.id %></title>
+  <style>
+    .button {
+      margin: 10px;
+      padding: 5px;
+      width: 150px;
+    }
+
+    .buttons {
+      margin: 10px;
+      display: flex;
+      flex-direction: row;
+    }
+  </style>
+</head>
+<body>
+
+<h1>TODO: <%= todo.title %></h1>
+
+<div>
+  <p>Priorita: <%= todo.done ? 'Hotové' : 'Nehotové' %></p>
+  <p style="color: <%= todo.priority === 'high' ? '#ff0000' : todo.priority === 'normal' ? '#ffcc00' : '#008000'; %>"
+  >Priorita: <%= todo.priority %></p>
+</div>
+
+<div class="buttons">
+  <form method="get" action="/toggle-todo/<%= todo.id %>">
+    <button class="button" type="submit">Změnit stav</button>
+  </form>
+  <form method="get" action="/remove-todo/<%= todo.id %>">
+    <button class="button" type="submit">Odstranit todočko</button>
+  </form>
+</div>
+
+<form method="post" action="/update-todo/<%= todo.id %>">
+  <input type="text" name="title" placeholder="Nový název todočka">
+  <button type="submit">Změnit název</button>
+</form>
+
+<form method="post" action="/update-priority/<%= todo.id %>">
+  <select name="priority" id="priority">
+    <option value="low">Low</option>
+    <option value="normal">Normal</option>
+    <option value="high">High</option>
+  </select>
+  <button type="submit">Změnit prioritu</button>
+</form>
+
+<a href="/">Zpět na seznam todoček</a>
+
+</body>
+</html>
