@@ -1,0 +1,26 @@
+<div>
+    <ul>
+        <% for (const todo of todos) { %>
+            <li>
+                <div class="todo-info">
+                    <span><a href="/todo/<%= todo.id %>"><%= todo.title %></a></span>
+                </div>
+                <div class="buttons">
+                    <form method="get" action="/toggle-todo/<%= todo.id %>">
+                        <button class="button" type="submit"><%= todo.done ? 'hotovo' : 'nehotovo' %></button>
+                    </form>
+                    <form method="get" action="/remove-todo/<%= todo.id %>">
+                        <button class="button" type="submit">Odstranit todočko</button>
+                    </form>
+                </div>
+            </li>
+        <% } %>
+    </ul>
+
+    <form method="post" action="/add-todo">
+        <label>
+            <input placeholder="Název todočka" name="title">
+        </label>
+        <button type="submit">Přidat</button>
+    </form>
+</div>

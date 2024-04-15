@@ -1,0 +1,32 @@
+<div>
+  <h1>TODO: <%= todo.title %></h1>
+
+  <div>
+    <p>Priorita: <%= todo.done ? 'Hotové' : 'Nehotové' %></p>
+    <p style="color: <%= todo.priority === 'high' ? '#ff0000' : todo.priority === 'normal' ? '#ffcc00' : '#008000'; %>"
+    >Priorita: <%= todo.priority %></p>
+  </div>
+
+  <div class="buttons">
+    <form method="get" action="/toggle-todo/<%= todo.id %>">
+      <button class="button" type="submit">Změnit stav</button>
+    </form>
+    <form method="get" action="/remove-todo/<%= todo.id %>">
+      <button class="button" type="submit">Odstranit todočko</button>
+    </form>
+  </div>
+
+  <form method="post" action="/update-todo/<%= todo.id %>">
+    <input type="text" name="title" placeholder="Nový název todočka">
+    <button type="submit">Změnit název</button>
+  </form>
+
+  <form method="post" action="/update-priority/<%= todo.id %>">
+    <select name="priority" id="priority">
+      <option value="low">Low</option>
+      <option value="normal">Normal</option>
+      <option value="high">High</option>
+    </select>
+    <button type="submit">Změnit prioritu</button>
+  </form>
+</div>
